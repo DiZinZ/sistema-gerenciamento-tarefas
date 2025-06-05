@@ -1,3 +1,3 @@
 # sistema-gerenciamento-tarefas
 FUNÇÕES UTILIZADAS
-![Uploading image.png…]()
+![Texto Alternativo](https://imgur.com/a/hiKYOYe)
