@@ -76,3 +76,60 @@ void carregarTarefas(char tarefas[][4][50], int *quantidade) {
     fclose(arquivo);
     printf("Tarefas carregadas com sucesso!\n");
 }
+int main() {
+    setlocale(LC_ALL, "Portuguese");
+    char tarefas[100][4][50]; 
+    int quantidade = 0; 
+    int opcao; 
+
+    carregarTarefas(tarefas, &quantidade); 
+
+    do {
+        printf("\nMenu:\n");
+        printf("1. Cadastrar Tarefa\n");
+        printf("2. Listar Tarefas\n");
+        printf("3. Editar Tarefa\n");
+        printf("4. Excluir Tarefa\n");
+        printf("5. Salvar Tarefas\n");
+        printf("6. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+        getchar(); // Limpar o buffer do teclado
+
+        switch (opcao) {
+            case 1:
+                cadastrarTarefa(tarefas, quantidade);
+                quantidade++;
+                break;
+            case 2:
+                listarTarefas(tarefas, quantidade);
+                break;
+            case 3: {
+                int indice;
+                printf("Digite o índice da tarefa a ser editada: ");
+                scanf("%d", &indice);
+                getchar(); // Limpar o buffer do teclado
+                editarTarefa(tarefas, indice);
+                break;
+            }
+            case 4: {
+                int indice;
+                printf("Digite o índice da tarefa a ser excluída: ");
+                scanf("%d", &indice);
+                getchar(); // Limpar o buffer do teclado
+                excluirTarefa(tarefas, &quantidade, indice);
+                break;
+            }
+            case 5:
+                SalvarTarefas(tarefas, quantidade);
+                break;
+            case 6:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+        }
+    } while (opcao != 6);
+
+    return 0;
+}
