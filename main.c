@@ -78,8 +78,6 @@ void carregarTarefas(char tarefas[][4][50], int *quantidade) {
 }
 int main() {
 
-    setlocale(LC_ALL, "Portuguese"); //por algum motivo as letras estão bugadas
-
     char tarefas[100][4][50]; // 100 tarefas, cada uma com 4 campos (título, descrição, prioridade, status)
 
     int quantidade = 0;
@@ -87,16 +85,14 @@ int main() {
     int opcao;
  
     do {
-
-        printf("\n  Sistema de Gerenciamento de Tarefas\n");
-
-        printf("1. Cadastrar Tarefa      4. Excluir Tarefa\n");
-
-        printf("2. Listar Tarefas        5. Sair\n");
-
+        setlocale(LC_ALL, "Portuguese");
+        printf("\nSISTEMA DE GERENCIAMENTO DE TAREFAS\n");
+        printf("1. Cadastrar Tarefa\n");
+        printf("2. Listar Tarefas\n");
         printf("3. Editar Tarefa\n");
-
-        printf("Escolha uma opção: ");
+        printf("4. Excluir Tarefa\n");
+        printf("5. Salvar Tarefas\n");
+        printf("6. Sair\n");
 
         scanf("%d", &opcao);
 
@@ -173,6 +169,8 @@ int main() {
                 printf("Saindo do sistema...\n");
 
                 break;
+
+                
 
             default:
 
