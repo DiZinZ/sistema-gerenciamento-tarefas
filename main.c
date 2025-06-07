@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <locale.h>
+#include <unistd.h>
 // TODAS AS FUNÇÕERS DO PROJETO
 void cadastrarTarefa(char tarefas[][4][50], int quantidade) {
     printf("Digite o título da tarefa: ");
@@ -76,15 +77,36 @@ void carregarTarefas(char tarefas[][4][50], int *quantidade) {
     fclose(arquivo);
     printf("Tarefas carregadas com sucesso!\n");
 }
+
+int registro(int a){
+    FILE *quant=fopen("quant.txt","w");
+    fprintf(quant, "%d", a);
+    fclose(quant);
+    return (a);
+    //salva a quantidade de tarefas antes do fechamento
+}
+
+int quanti(int a){
+    if(access("quant.txt",F_OK)){
+        return 0;
+    }
+    else{
+        FILE *quant=fopen("quant.txt","r");
+        return (fscanf(quant, "%d", &a));
+        fclose(quant);
+        //lê a quantidade de tarefas salvas
+    }
+}
 int main() {
 
     char tarefas[100][4][50]; // 100 tarefas, cada uma com 4 campos (título, descrição, prioridade, status)
 
-    int quantidade = 0;
+    int quantidade;
 
     int opcao;
  
     do {
+        quantidade= quanti(quantidade);
         setlocale(LC_ALL, "Portuguese");
         printf("\nSISTEMA DE GERENCIAMENTO DE TAREFAS\n");
         printf("1. Cadastrar Tarefa\n");
@@ -105,6 +127,7 @@ int main() {
                 cadastrarTarefa(tarefas, quantidade);
 
                 quantidade++;
+                quantidade=registro(quantidade);
 
                 break;
 
@@ -166,11 +189,11 @@ int main() {
 
                 SalvarTarefas(tarefas, quantidade);
 
-                printf("Saindo do sistema...\n");
-
                 break;
 
-                
+            case 6:
+                printf("Saindo...\n");
+                break;
 
             default:
 
@@ -178,7 +201,7 @@ int main() {
 
         }
 
-    } while (opcao != 5);
+    } while (opcao != 6);
 
     return 0;
 
