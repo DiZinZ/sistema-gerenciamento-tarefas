@@ -1,86 +1,82 @@
+# 📝 Sistema de Gerenciamento de Tarefas (C)
 
-# 📋 Sistema de Gerenciamento de Tarefas em C
+Este é um projeto simples de gerenciamento de tarefas escrito em **Linguagem C**, com funcionalidades para cadastrar, listar, editar, excluir, salvar e carregar tarefas. O sistema também registra a quantidade de tarefas salvas em disco.
 
-## 📌 Descrição
+## 📋 Funcionalidades
 
-Este é um programa simples de gerenciamento de tarefas desenvolvido em linguagem C. Ele permite ao usuário:
-
-- Cadastrar novas tarefas;
-- Listar todas as tarefas cadastradas;
-- Editar tarefas existentes;
-- Excluir tarefas;
-- Salvar as tarefas em um arquivo (`tarefas.txt`);
-- Carregar tarefas salvas ao iniciar o programa.
-
-As tarefas são armazenadas em uma matriz tridimensional e organizadas com os seguintes campos:
-
-- Título  
-- Descrição  
-- Prioridade  
-- Status  
+- ✅ Cadastrar tarefa
+- 📄 Listar tarefas existentes
+- ✏️ Editar uma tarefa por índice
+- ❌ Excluir tarefa por índice
+- 💾 Salvar tarefas em arquivo `.txt`
+- 🔁 Carregamento automático da quantidade de tarefas com arquivo auxiliar (`quant.txt`)
 
 ---
 
-## ▶️ Como Compilar e Executar
+## ⚙️ Como compilar e executar no VS Code
 
-### ✔️ Requisitos
-- Um compilador C (como `gcc`)
-- Terminal ou prompt de comando
+### Pré-requisitos
 
-### 🔧 Compilação
-
-No terminal, use o seguinte comando para compilar:
-
-```bash
-gcc -o tarefas tarefas.c
-```
-
-### 🚀 Execução
-
-Após a compilação, execute o programa com:
-
-```bash
-./tarefas
-```
+1. Ter o **Visual Studio Code** instalado
+2. Ter um **compilador C** configurado, como:
+   - **MinGW** (Windows)
+   - **MSYS2** (Windows)
+   - **GCC** ou **Clang** (Linux/macOS)
+3. Ter a **extensão C/C++** da Microsoft instalada no VS Code
 
 ---
 
-## 🗂️ Arquivo de Tarefas
+### Etapas
 
-O programa salva e carrega as tarefas de um arquivo chamado `tarefas.txt`, localizado no mesmo diretório do executável.
+1. Abra o **VS Code** e crie um novo arquivo chamado `tarefas.c`
+2. Copie o código-fonte do projeto para este arquivo
+3. Abra o **terminal integrado** do VS Code (atalho: `Ctrl + ``)
+4. Compile o código com:
+
+   ```bash
+   gcc tarefas.c -o tarefas
+   ```
+
+   ou
+
+   ```bash
+   clang tarefas.c -o tarefas
+   ```
+
+5. Execute o programa:
+
+   - **Windows**:
+
+     ```bash
+     .\tarefas
+     ```
+
+   - **Linux/macOS**:
+
+     ```bash
+     ./tarefas
+     ```
 
 ---
 
-## 🧾 Commits
+## 🗃️ Estrutura de Arquivos
 
-### ✅ Commit 1 - Implementação das Funções Principais
-
-```bash
-git commit -m "Implementa funções principais do sistema de tarefas (cadastrar, listar, editar, excluir, salvar e carregar)"
-```
-
-**Descrição:**
-> Este commit inclui a implementação de todas as funções principais do sistema:
-> - `cadastrarTarefa`
-> - `listarTarefas`
-> - `editarTarefa`
-> - `excluirTarefa`
-> - `SalvarTarefas`
-> - `carregarTarefas`
-
-Essas funções são responsáveis por toda a lógica de manipulação de tarefas, incluindo entrada e saída com arquivos (`tarefas.txt`).
+- `tarefas.c`: Código-fonte principal
+- `tarefas.txt`: Arquivo onde as tarefas são salvas
+- `quant.txt`: Arquivo auxiliar que armazena a quantidade de tarefas salvas
 
 ---
 
-### ✅ Commit 2 - Implementação do Menu e Função `main()`
+## 🛠️ Problemas conhecidos
 
-```bash
-git commit -m "Adiciona função main com menu interativo e integração com funções de tarefas"
-```
+- [ ] As edições feitas em tarefas podem sobrescrever dados incorretamente
+- [ ] As tarefas salvas não são carregadas corretamente após reinício do programa
+- [ ] A variável `quantidade` não mantém o valor salvo após encerrar o programa (parcialmente resolvido com `quant.txt`)
 
-**Descrição:**
-> Este commit adiciona a função `main()` que apresenta um menu interativo ao usuário. Ele conecta todas as funcionalidades previamente criadas, permitindo que o usuário:
-> - Selecione opções do menu;
-> - Execute ações como cadastrar, listar, editar, excluir e salvar tarefas;
-> - Carregue as tarefas automaticamente ao iniciar o programa;
-> - Encerre o programa de forma segura.
+Esses pontos ainda estão em desenvolvimento.
+
+---
+
+## 👤 Autor
+
+Desenvolvido por Dillan Fernandes e Samuel Larroque.
