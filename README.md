@@ -24,6 +24,23 @@ Este projeto faz uso das seguintes estruturas de controle da linguagem C:
 
 ---
 
+## ▶️ Como executar diretamente (Windows)
+
+Se você já possui o executável `sistema-gerenciamento-tarefas.exe`:
+
+1. Baixe o arquivo `sistema-gerenciamento-tarefas.exe`  
+2. Coloque-o em uma pasta de sua preferência  
+3. Dê **duplo clique** no arquivo para abrir o programa  
+   - ou abra o terminal (Prompt de Comando) e navegue até a pasta com:
+     ```bash
+     cd caminho\da\pasta
+     sistema-gerenciamento-tarefas.exe
+     ```
+
+> 💡 *Certifique-se de que o executável está na mesma pasta onde os arquivos `tarefas.txt` e `quant.txt` serão criados ou já existem, para que o programa funcione corretamente.*
+
+---
+
 ## ⚙️ Como compilar e executar no VS Code
 
 ### Pré-requisitos
