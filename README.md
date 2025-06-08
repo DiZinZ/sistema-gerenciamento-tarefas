@@ -77,11 +77,11 @@ Este projeto faz uso das seguintes estruturas de controle da linguagem C:
 
 ---
 
-## 🛠️ Problemas conhecidos
+## 🛠️ Problemas conhecidos (Resolvidos)
 
 - [✅] As edições feitas em tarefas podem sobrescrever dados incorretamente  
-- [❌] As tarefas salvas não são carregadas corretamente após reinício do programa  
-- [❌] A variável `quantidade` não mantém o valor salvo após encerrar o programa (parcialmente resolvido com `quant.txt`)  
+- [✅] As tarefas salvas não são carregadas corretamente após reinício do programa  
+- [✅] A variável `quantidade` não mantém o valor salvo após encerrar o programa (parcialmente resolvido com `quant.txt`)  
 
 Esses pontos ainda estão em desenvolvimento.
 
