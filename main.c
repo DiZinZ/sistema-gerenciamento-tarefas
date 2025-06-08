@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <locale.h>
-// TODAS AS FUNÇÕERS DO PROJETO
+#include <unistd.h>
+#include <string.h>
+
+// TODAS AS FUNÇÕES DO PROJETO
 void cadastrarTarefa(char tarefas[][4][50], int quantidade) {
     printf("Digite o título da tarefa: ");
     fgets(tarefas[quantidade][0], 50, stdin);
@@ -36,6 +39,7 @@ void editarTarefa(char tarefas[][4][50], int indice) {
     printf("Editar status: ");
     fgets(tarefas[indice][3], 50, stdin);
 }
+
 void excluirTarefa(char tarefas[][4][50], int *quantidade, int indice) {
     if (indice < 0 || indice >= *quantidade) {
         printf("Índice inválido!\n");
@@ -49,6 +53,7 @@ void excluirTarefa(char tarefas[][4][50], int *quantidade, int indice) {
     (*quantidade)--;
     printf("Tarefa excluída com sucesso!\n");
 }
+
 void SalvarTarefas(char tarefas[][4][50], int quantidade) {
     FILE *arquivo = fopen("tarefas.txt", "w");
     if (arquivo == NULL) {
@@ -61,6 +66,7 @@ void SalvarTarefas(char tarefas[][4][50], int quantidade) {
     fclose(arquivo);
     printf("Tarefas salvas com sucesso!\n");
 }
+
 void carregarTarefas(char tarefas[][4][50], int *quantidade) {
     FILE *arquivo = fopen("tarefas.txt", "r");
     if (arquivo == NULL) {
@@ -76,16 +82,36 @@ void carregarTarefas(char tarefas[][4][50], int *quantidade) {
     fclose(arquivo);
     printf("Tarefas carregadas com sucesso!\n");
 }
+
+int registro(int a){
+    FILE *quant = fopen("quant.txt", "w");
+    fprintf(quant, "%d", a);
+    fclose(quant);
+    return a;
+}
+
+int quanti(int a){
+    if (access("quant.txt", F_OK)) {
+        return 0;
+    } else {
+        FILE *quant = fopen("quant.txt", "r");
+        fscanf(quant, "%d", &a);
+        fclose(quant);
+        return a;
+    }
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");
-    char tarefas[100][4][50]; 
-    int quantidade = 0; 
-    int opcao; 
 
-    carregarTarefas(tarefas, &quantidade); 
+    char tarefas[100][4][50];
+    int quantidade = quanti(0); // Lê quantidade salva anteriormente
+    int opcao;
+
+    carregarTarefas(tarefas, &quantidade);
 
     do {
-        printf("\nMenu:\n");
+        printf("\nSISTEMA DE GERENCIAMENTO DE TAREFAS\n");
         printf("1. Cadastrar Tarefa\n");
         printf("2. Listar Tarefas\n");
         printf("3. Editar Tarefa\n");
@@ -94,32 +120,44 @@ int main() {
         printf("6. Sair\n");
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
-        getchar(); // Limpar o buffer do teclado
+        getchar(); // Limpar buffer
 
         switch (opcao) {
             case 1:
                 cadastrarTarefa(tarefas, quantidade);
                 quantidade++;
+                registro(quantidade);
                 break;
             case 2:
                 listarTarefas(tarefas, quantidade);
                 break;
-            case 3: {
-                int indice;
-                printf("Digite o índice da tarefa a ser editada: ");
-                scanf("%d", &indice);
-                getchar(); // Limpar o buffer do teclado
-                editarTarefa(tarefas, indice);
+            case 3:
+                if (quantidade > 0) {
+                    int indice;
+                    printf("Digite o índice da tarefa a ser editada (0 a %d): ", quantidade - 1);
+                    scanf("%d", &indice);
+                    getchar();
+                    if (indice >= 0 && indice < quantidade) {
+                        editarTarefa(tarefas, indice);
+                    } else {
+                        printf("Índice inválido!\n");
+                    }
+                } else {
+                    printf("Nenhuma tarefa cadastrada.\n");
+                }
                 break;
-            }
-            case 4: {
-                int indice;
-                printf("Digite o índice da tarefa a ser excluída: ");
-                scanf("%d", &indice);
-                getchar(); // Limpar o buffer do teclado
-                excluirTarefa(tarefas, &quantidade, indice);
+            case 4:
+                if (quantidade > 0) {
+                    int indice;
+                    printf("Digite o índice da tarefa a ser excluída (0 a %d): ", quantidade - 1);
+                    scanf("%d", &indice);
+                    getchar();
+                    excluirTarefa(tarefas, &quantidade, indice);
+                    registro(quantidade);
+                } else {
+                    printf("Nenhuma tarefa cadastrada.\n");
+                }
                 break;
-            }
             case 5:
                 SalvarTarefas(tarefas, quantidade);
                 break;
@@ -129,6 +167,7 @@ int main() {
             default:
                 printf("Opção inválida! Tente novamente.\n");
         }
+
     } while (opcao != 6);
 
     return 0;
